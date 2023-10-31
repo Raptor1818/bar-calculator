@@ -147,7 +147,7 @@ function App() {
   };
 
   return (
-    <div className="bg-[#121212] min-h-screen text-white py-12 px-4">
+    <div className="bg-[#121212] min-h-screen text-white py-8 px-4">
       <h1 className="text-4xl font-bold bg-gradient-to-br from-amber-700 to-yellow-400 bg-clip-text text-transparent mb-8 text-center h-fit w-fit p-1">Calcolatore per il bar</h1>
 
       <div className="rounded-md bg-[#303030] shadow-md shadow-black p-4">
