@@ -142,7 +142,7 @@ function App() {
 
   return (
     <div className="bg-[#121212] min-h-screen text-white py-12 px-4">
-      <h1 className="text-4xl font-bold mb-8 text-center">School Bar Price Calculator</h1>
+      <h1 className="text-4xl font-bold mb-8 text-center">Calcolatore per il bar</h1>
 
       <div className="rounded-md bg-[#303030] shadow-md p-4">
         <div className="grid md:grid-cols-2 gap-4">
@@ -176,7 +176,7 @@ function App() {
             </ul>
           </div>
 
-          <div className="border-solid border-t-2 border-neutral-600">
+          <div className="border-solid md:border-l-2 md:border-t-0 border-t-2 md:mr-4 border-neutral-600">
             <div className="flex justify-between items-center mt-4">
               <h2 className="text-xl font-semibold">Order</h2>
               <button
@@ -214,7 +214,7 @@ function App() {
               ))}
             </ul>
             <p className="text-xl font-semibold mt-4">
-              Total: €{calculateTotal().toFixed(2)}
+              Totale: €{calculateTotal().toFixed(2)}
             </p>
           </div>
         </div>
