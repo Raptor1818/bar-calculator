@@ -98,6 +98,8 @@ function App() {
 
   const [order, setOrder] = useState([]); // State to manage the user's order
 
+  const [flashItemId, setFlashItemId] = useState(null);
+
   // Function to add an item to the order
   const addItemToOrder = (item) => {
     const existingItem = order.find((orderItem) => orderItem.id === item.id);
@@ -113,6 +115,10 @@ function App() {
       // If the item is not in the order, add it with a quantity of 1
       setOrder([...order, { ...item, quantity: 1 }]);
     }
+
+    // Flash the item's border by setting its ID
+    setFlashItemId(item.id);
+    setTimeout(() => setFlashItemId(null), 300); // Remove the flash after 300ms
   };
 
   // Function to remove an item from the order
@@ -142,22 +148,27 @@ function App() {
 
   return (
     <div className="bg-[#121212] min-h-screen text-white py-12 px-4">
-      <h1 className="text-4xl font-bold mb-8 text-center">Calcolatore per il bar</h1>
+      <h1 className="text-4xl font-bold bg-gradient-to-br from-amber-700 to-yellow-400 bg-clip-text text-transparent mb-8 text-center h-fit w-fit p-1">Calcolatore per il bar</h1>
 
-      <div className="rounded-md bg-[#303030] shadow-md p-4">
+      <div className="rounded-md bg-[#303030] shadow-md shadow-black p-4">
         <div className="grid md:grid-cols-2 gap-4">
           <div>
-            <h2 className="text-2xl text-center font-semibold mb-3">Menu</h2>
+            <h2 className="text-2xl text-center font-semibold mb-3">Menù</h2>
             <ul>
               {bar_items.map((item) => (
-                <li className="my-2 flex justify-between rounded-md border-solid border-2" key={item.id}>
+                <li
+                  className={`my-2 flex justify-between rounded-md border-solid border-2 shadow-neutral-900 shadow-md ${
+                    flashItemId === item.id ? 'border-[#47ff47]' : 'border-white'
+                  } transition-border duration-250 ease-out`}
+                  key={item.id}
+                >
                   <div>
                     <p className="p-2">
                       {item.name}
                     </p>
                   </div>
-                  <div className='flex justify-between'>
-                    <div className='mr-1'>
+                  <div className="flex justify-between">
+                    <div className="mr-1">
                       <p className="p-2">
                         €{item.price.toFixed(2)}
                       </p>
@@ -178,9 +189,12 @@ function App() {
 
           <div className="border-solid md:border-l-2 md:border-t-0 border-t-2 md:mr-4 border-neutral-600">
             <div className="flex justify-between items-center mt-4">
-              <h2 className="text-xl font-semibold">Order</h2>
+              <h2 className="text-xl font-semibold">Ordine</h2>
+              <p className="text-xl font-semibold">
+                Totale: €{calculateTotal().toFixed(2)}
+              </p>
               <button
-                className="border-solid border-2 rounded-md px-2 py-1"
+                className="border-solid border-2 rounded-md px-2 py-1 shadow-neutral-900 shadow-md"
                 onClick={() => clearOrder()}
               >
                 Clear
@@ -188,15 +202,15 @@ function App() {
             </div>
             <ul>
               {order.map((item) => (
-                <li className="my-2 flex justify-between rounded-md border-solid border-2" key={item.id}>
+                <li className="my-2 flex justify-between rounded-md border-solid border-2 shadow-neutral-900 shadow-md" key={item.id}>
                   <div>
                     <p className="p-2">
                       {item.quantity > 1 && `x${item.quantity} `}
                       {item.name}
                     </p>
                   </div>
-                  <div className='flex justify-between'>
-                    <div className='mr-1'>
+                  <div className="flex justify-between">
+                    <div className="mr-1">
                       <p className="p-2">
                         €{item.price.toFixed(2)}
                       </p>
@@ -213,9 +227,6 @@ function App() {
                 </li>
               ))}
             </ul>
-            <p className="text-xl font-semibold mt-4">
-              Totale: €{calculateTotal().toFixed(2)}
-            </p>
           </div>
         </div>
       </div>
