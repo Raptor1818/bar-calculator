@@ -1,110 +1,21 @@
-import { useState } from 'react';
-import { FaSquarePlus } from 'react-icons/fa6';
-import { FaSquareMinus } from 'react-icons/fa6';
+import { useState } from "react";
+import { FaSquarePlus } from "react-icons/fa6";
+import { FaSquareMinus } from "react-icons/fa6";
+import { bar_items } from "./barItems";
 
 function List() {
-  const bar_items = [
-    {
-      id: 1,
-      name: 'Cotoletta',
-      price: 3
-    },
-    {
-      id: 2,
-      name: 'Cordon bleu',
-      price: 3.5
-    },
-    {
-      id: 3,
-      name: 'Hot dog',
-      price: 3
-    },
-    {
-      id: 4,
-      name: 'Casereccio',
-      price: 3.5
-    },
-    {
-      id: 5,
-      name: 'Tirolese',
-      price: 3
-    },
-    {
-      id: 6,
-      name: 'Tostone',
-      price: 3
-    },
-    {
-      id: 7,
-      name: 'Messico',
-      price: 3
-    },
-    {
-      id: 8,
-      name: 'Crudo',
-      price: 4
-    },
-    {
-      id: 9,
-      name: 'Caprese',
-      price: 2.8
-    },
-    {
-      id: 10,
-      name: 'Tramezzini',
-      price: 2.5
-    },
-    {
-      id: 11,
-      name: 'Pizza margherita',
-      price: 2.3
-    },
-    {
-      id: 12,
-      name: 'Pizza farcita',
-      price: 2.8
-    },
-    {
-      id: 13,
-      name: 'Piadina',
-      price: 3
-    },
-    {
-      id: 14,
-      name: 'Cheese burger',
-      price: 4.5
-    },
-    {
-      id: 15,
-      name: 'Bomber',
-      price: 6
-    },
-    {
-      id: 16,
-      name: 'Mignola',
-      price: 6
-    },
-    {
-      id: 17,
-      name: 'Goloso',
-      price: 6
-    },
-    {
-      id: 18,
-      name: 'Chicken Burger',
-      price: 5
-    }
-  ];
-
-  const [order, setOrder] = useState([]); // State to manage the user's order
-
+  const [order, setOrder] = useState([]);
   const [flashItemId, setFlashItemId] = useState(null);
+  const [showMenu, setShowMenu] = useState(true);
 
-  // Function to add an item to the order
-  const addItemToOrder = (item) => {
+    // Suddividi gli articoli in tre sezioni
+    const panini = bar_items.slice(0, 9); // Dal 1 al 9
+    const altriPanini = bar_items.slice(9, 13); // Dal 10 al 13
+    const menuPranzo = bar_items.slice(13); // Dal 14 all'ultimo
+
+  const addItemToOrder = (item) => { //Aggiunge un articolo all'ordine
     const existingItem = order.find((orderItem) => orderItem.id === item.id);
     if (existingItem) {
-      // If the item already exists, increase its quantity
       const updatedOrder = order.map((orderItem) =>
         orderItem.id === item.id
           ? { ...orderItem, quantity: orderItem.quantity + 1 }
@@ -112,22 +23,17 @@ function List() {
       );
       setOrder(updatedOrder);
     } else {
-      // If the item is not in the order, add it with a quantity of 1
       setOrder([...order, { ...item, quantity: 1 }]);
     }
 
-    // Flash the item's border by setting its ID
     setFlashItemId(item.id);
-    setTimeout(() => setFlashItemId(null), 300); // Remove the flash after 300ms
+    setTimeout(() => setFlashItemId(null), 300);
   };
 
-  // Function to remove an item from the order
-  const removeItemFromOrder = (itemToRemove) => {
+  const removeItemFromOrder = (itemToRemove) => { //Rimuove un articolo all'ordine
     if (itemToRemove.quantity === 1) {
-      // If the item's quantity is 1, remove it from the order
       setOrder(order.filter((item) => item.id !== itemToRemove.id));
     } else {
-      // If the item's quantity is more than 1, decrease its quantity by 1
       const updatedOrder = order.map((orderItem) =>
         orderItem.id === itemToRemove.id
           ? { ...orderItem, quantity: orderItem.quantity - 1 }
@@ -137,97 +43,142 @@ function List() {
     }
   };
 
-  const clearOrder = () => {
+  const clearOrder = () => { //Rimuove tutti gli articoli all'ordine
     setOrder([]);
   };
 
-  // Function to calculate the total of the order
-  const calculateTotal = () => {
+  const calculateTotal = () => { //Calcola il totale di tutti gli articoli all'ordine
     return order.reduce((total, item) => total + item.price * item.quantity, 0);
   };
 
+  const groupedOrder = order.reduce((acc, item) => { //Aggiunge tutti gli articoli all'ordine in un array
+    const existingItem = acc.find((groupedItem) => groupedItem.id === item.id);
+    if (existingItem) {
+      existingItem.quantity += item.quantity;
+    } else {
+      acc.push({ ...item });
+    }
+    return acc;
+  }, []);
+
   return (
-    <div className="bg-[#121212] min-h-screen text-white py-8 px-4">
-      <h1 className="text-4xl font-bold bg-gradient-to-br from-amber-700 to-yellow-400 bg-clip-text text-transparent mb-8 text-center h-fit w-fit p-1">Calcolatore per il bar</h1>
+    <div className="bg-[#121212] min-h-screen text-white py-8 px-4 flex flex-col items-center">
+      <h1 className="text-4xl font-extrabold bg-gradient-to-br from-amber-700 to-yellow-400 bg-clip-text text-transparent mb-8 text-center h-fit w-fit p-1">
+        Calcolatore per il bar
+      </h1>
 
-      <div className="rounded-md bg-[#303030] shadow-md shadow-black p-4">
-        <div className="grid md:grid-cols-2 gap-4">
-          <div>
-            <h2 className="text-2xl text-center font-semibold mb-3">Menù</h2>
-            <ul>
-              {bar_items.map((item) => (
-                <li
-                  className={`my-2 flex justify-between rounded-md border-solid border-2 shadow-neutral-900 shadow-md ${
-                    flashItemId === item.id ? 'border-[#47ff47]' : 'border-white'
-                  } transition-border duration-250 ease-out`}
-                  key={item.id}
-                >
-                  <div>
-                    <p className="p-2">
-                      {item.name}
-                    </p>
+      <div className="text-center mb-4">
+        <button
+          className={`mr-4 p-2 rounded-md ${
+            showMenu
+              ? "bg-gradient-to-br from-amber-700 to-yellow-400"
+              : "bg-gradient-to-br from-neutral-700 to-neutral-400"
+          } shadow-md shadow-black text-white font-semibold transition duration-200ms ease-out`}
+          onClick={() => setShowMenu(true)}
+        >
+          Menu
+        </button>
+        <button
+          className={`p-2 rounded-md ${
+            showMenu
+              ? "bg-gradient-to-br from-neutral-700 to-neutral-400"
+              : "bg-gradient-to-br from-amber-700 to-yellow-400"
+          } shadow-md shadow-black text-white font-semibold transition duration-200 ease-out`}
+          onClick={() => setShowMenu(false)}
+        >
+          Ordine
+        </button>
+      </div>
+      
+      <div className="rounded-md bg-[#303030] shadow-md shadow-black p-4 w-full md:w-1/3">
+        <div className="gap-4">
+          {showMenu ? (
+            <div>
+              <h2 className="text-2xl text-center font-bold mb-3">Menù</h2>
+              <ul>
+                {bar_items.map((item, index) => (
+                  <div key={item.id}>
+                    {index === 0 || item.id === 10 || item.id === 14 ? (
+                      <h2 className="text-xl font-semibold mt-2">
+                        {item.id === 1 ? "Panini" : item.id === 10 ? "Altri Panini" : "Menu Pranzo"}
+                      </h2>
+                    ) : null}
+                    <li
+                      className={`my-2 flex justify-between rounded-md border-solid border-[1px] shadow-neutral-900 shadow-md ${
+                        flashItemId === item.id ? "border-[#47ff47]" : "border-white"
+                      } transition duration-200 ease-out`}
+                    >
+                      <div>
+                        <p className="p-2">{item.name}</p>
+                      </div>
+                      <div className="flex justify-between">
+                        <div className="mr-1">
+                          <p className="p-2">€{item.price.toFixed(2)}</p>
+                        </div>
+                        <div>
+                          <button
+                            className="h-10 w-10 flex items-center justify-center"
+                            onClick={() => addItemToOrder(item)}
+                          >
+                            <FaSquarePlus className="text-3xl" />
+                          </button>
+                        </div>
+                      </div>
+                    </li>
                   </div>
-                  <div className="flex justify-between">
-                    <div className="mr-1">
-                      <p className="p-2">
-                        €{item.price.toFixed(2)}
-                      </p>
-                    </div>
-                    <div>
-                      <button
-                        className="h-10 w-10 flex items-center justify-center"
-                        onClick={() => addItemToOrder(item)}
-                      >
-                        <FaSquarePlus className="text-3xl" />
-                      </button>
-                    </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="border-solid md:border-l-2 md:border-t-0 border-t-2 md:mr-4 border-neutral-600">
-            <div className="flex justify-between items-center mt-4">
-              <h2 className="text-xl font-semibold">Ordine</h2>
-              <p className="text-xl font-semibold">
-                Totale: €{calculateTotal().toFixed(2)}
-              </p>
-              <button
-                className="border-solid border-2 rounded-md px-2 py-1 shadow-neutral-900 shadow-md"
-                onClick={() => clearOrder()}
-              >
-                Clear
-              </button>
+                ))}
+              </ul>
             </div>
-            <ul>
-              {order.map((item) => (
-                <li className="my-2 flex justify-between rounded-md border-solid border-2 shadow-neutral-900 shadow-md" key={item.id}>
-                  <div>
-                    <p className="p-2">
-                      {item.quantity > 1 && `x${item.quantity} `}
-                      {item.name}
-                    </p>
-                  </div>
-                  <div className="flex justify-between">
-                    <div className="mr-1">
+          ) : (  // ---------------------- sezione ordine ------------------------------------------------------------------
+            <div className="">
+              <div className="flex flex-col justify-between items-center">
+                <div>
+                  <h2 className="text-2xl font-bold">Ordine</h2>
+                </div>
+                <div className="flex justify-between w-full mt-2">
+                  <p className="text-xl font-semibold">
+                    Totale: €{calculateTotal().toFixed(2)}
+                  </p>
+                  <button
+                    className="border-solid border-[1px] rounded-md px-2 py-1 shadow-neutral-900 shadow-md"
+                    onClick={() => clearOrder()}
+                  >
+                    Clear
+                  </button>
+                </div>
+              </div>
+              <ul>
+                {groupedOrder.map((item) => (
+                  <li
+                    className="my-2 flex justify-between rounded-md border-solid border-[1px] shadow-neutral-900 shadow-md"
+                    key={item.id}
+                  >
+                    <div className="flex flex-row">
                       <p className="p-2">
-                        €{item.price.toFixed(2)}
+                        {item.name}
                       </p>
                     </div>
-                    <div>
-                      <button
-                        className="h-10 w-10 flex items-center justify-center"
-                        onClick={() => removeItemFromOrder(item)}
-                      >
-                        <FaSquareMinus className="text-3xl" />
-                      </button>
+                    <div className="flex justify-between">
+                      <p className="p-2 text-right">
+                        {item.quantity > 1 && `x${item.quantity} `}
+                      </p>
+                      <div className="mr-1">
+                        <p className="p-2">€{(item.price * item.quantity).toFixed(2)}</p>
+                      </div>
+                      <div>
+                        <button
+                          className="h-10 w-10 flex items-center justify-center"
+                          onClick={() => removeItemFromOrder(item)}
+                        >
+                          <FaSquareMinus className="text-3xl" />
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     </div>
