@@ -3,8 +3,8 @@
 @tailwind utilities; 
 
 @layer base {
-  @font-face { font-family: 'Roboto Mono'; src: url('/fonts/RobotoMono-VariableFont_wght.woff2'); }
-  @font-face { font-family: 'Nunito'; src: url('/fonts/Nunito-VariableFont_wght.woff2'); }
+  @font-face { font-family: 'Roboto Mono'; font-style: normal; font-weight: 400; src: local('Roboto Mono'), url('/fonts/RobotoMono-VariableFont_wght.woff2') format('woff2'); font-display: swap; }
+  @font-face { font-family: 'Nunito'; font-style: normal; font-weight: 400; src: local('Nunito'), url('/fonts/Nunito-VariableFont_wght.woff2') format('woff2'); font-display: swap; }
   html,body { image-rendering: optimizeSpeed; text-rendering: optimizeSpeed; }
   a:active, button:active { outline: 3px solid #ccc !important; outline-color: #ccc !important; outline-offset: 1px !important; border-radius: .375rem !important }
   .listDisplay ul { display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: .35rem }
