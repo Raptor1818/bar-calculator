@@ -2,11 +2,39 @@
 @tailwind components; 
 @tailwind utilities; 
 
-@font-face {
-  font-family: 'Roboto Mono';
-  src: url('/fonts/RobotoMono-VariableFont_wght.ttf');
-}
-@font-face {
-  font-family: 'Nunito';
-  src: url('/fonts/Nunito-VariableFont_wght.ttf');
+@layer base {
+  @font-face {
+    font-family: 'Roboto Mono';
+    /* convert from ttf to woff2 (lighter) */
+    src: url('/fonts/RobotoMono-VariableFont_wght.woff2') format('woff2');
+    font-display: optional;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Nunito';
+    src: url('/fonts/Nunito-VariableFont_wght.woff2') format('woff2');
+    font-display: optional;
+    font-style: normal;
+  }
+
+  a:focus, a:focus-visible, a:focus-within, 
+  button:focus, button:focus-visible, button:focus-within {
+    outline: 3px solid #ccc !important;
+    outline-color: #ccc !important;
+    outline-offset: 1px !important;
+    border-radius: .375rem !important;
+  }
+
+  a:active, button:active { outline: 1px solid #facc15 }
+
+  .listDisplay ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: .35rem;
+  }
+  .listDisplay ul li { width: 100%; }
+  .listDisplay ul li:nth-child(1) { margin: 1rem 0 .75rem 0; }
+  .listDisplay ul li { margin: 0 0 .75rem 0; }
 }
