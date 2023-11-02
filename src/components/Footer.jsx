@@ -23,7 +23,7 @@ const Footer = () => {
               role="link"
               aria-label="Author Francesco Nisi"
             >
-              {" "} Francesco Nisi
+              {" "} Francesco
               <span className="absolute inset-x-0 bottom-0 w-full h-[2px] bg-gradient-to-r from-amber-800 to-yellow-500"></span>
             </a>
             {" "} & {" "}
@@ -37,7 +37,7 @@ const Footer = () => {
               role="link"
               aria-label="Author Matteo Manià"
             >
-              {" "} Matteo Manià
+              {" "} Matteo
               <span className="absolute inset-x-0 bottom-0 w-full h-[2px] bg-gradient-to-r from-amber-800 to-yellow-500"></span>
             </a>
           </p>

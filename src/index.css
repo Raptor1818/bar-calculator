@@ -5,16 +5,11 @@
 @layer base {
   @font-face {
     font-family: 'Roboto Mono';
-    /* convert from ttf to woff2 (lighter) */
-    src: url('/fonts/RobotoMono-VariableFont_wght.woff2') format('woff2');
-    font-display: optional;
-    font-style: normal;
+    src: url('/fonts/RobotoMono-VariableFont_wght.woff2');
   }
   @font-face {
     font-family: 'Nunito';
-    src: url('/fonts/Nunito-VariableFont_wght.woff2') format('woff2');
-    font-display: optional;
-    font-style: normal;
+    src: url('/fonts/Nunito-VariableFont_wght.woff2');
   }
 
   a:focus, a:focus-visible, a:focus-within, 
