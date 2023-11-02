@@ -1,9 +1,10 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { FaCopy } from "react-icons/fa";
 
 function CopyableOrderText({ order }) {
   const [copied, setCopied] = useState(false);
-
   const getOrderText = () => {
     return order.map((item) => `x${item.quantity} ${item.name}`).join(",\n");
   };
@@ -11,9 +12,7 @@ function CopyableOrderText({ order }) {
   const copyToClipboard = () => {
     const orderText = getOrderText();
     navigator.clipboard.writeText(orderText);
-
     setCopied(true);
-
     setTimeout(() => setCopied(false), 3000);
   };
 
@@ -50,7 +49,7 @@ function CopyableOrderText({ order }) {
         </div>
       </div>
       <p className="text-md text-neutral-100 text-center mt-4">
-        Copia e manda nel gruppo di Whatsapp! Ricorda di aggiungere la classe e l'ora dell'ordine
+        Copia e manda nel gruppo di Whatsapp! Ricorda di aggiungere la classe e l&#39; ora dell&#39; ordine
       </p>
     </div>
   );

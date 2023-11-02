@@ -3,45 +3,14 @@
 @tailwind utilities; 
 
 @layer base {
-  @font-face {
-    font-family: 'Roboto Mono';
-    src: url('/fonts/RobotoMono-VariableFont_wght.woff2');
-  }
-  @font-face {
-    font-family: 'Nunito';
-    src: url('/fonts/Nunito-VariableFont_wght.woff2');
-  }
-
-  a:active, button:active {
-    outline: 3px solid #ccc !important;
-    outline-color: #ccc !important;
-    outline-offset: 1px !important;
-    border-radius: .375rem !important;
-  }
-
-  .listDisplay ul {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: .35rem;
-  }
+  @font-face { font-family: 'Roboto Mono'; src: url('/fonts/RobotoMono-VariableFont_wght.woff2'); }
+  @font-face { font-family: 'Nunito'; src: url('/fonts/Nunito-VariableFont_wght.woff2'); }
+  html,body { image-rendering: optimizeSpeed; text-rendering: optimizeSpeed; }
+  a:active, button:active { outline: 3px solid #ccc !important; outline-color: #ccc !important; outline-offset: 1px !important; border-radius: .375rem !important }
+  .listDisplay ul { display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: .35rem }
   .listDisplay ul li { width: 100%; }
   .listDisplay ul li:nth-child(1) { margin: 1rem 0 .75rem 0; }
   .listDisplay ul li { margin: 0 0 .75rem 0; }
 }
-
-.copied-span {
-  opacity: 0;
-  transition: opacity 0.3s ease-out;
-}
-
-.copied-span.visible {
-  opacity: 1;
-  transform: translateX(-60%);
-  transition: opacity 0.3s ease-out, transform 0s 0.3s;
-}
-
-select {
-  font-family: 'Nunito', sans-serif;
-}
+.copied-span { opacity: 0; transition: opacity 0.3s ease-out }
+.copied-span.visible { opacity: 1; transform: translateX(-60%); transition: opacity 0.3s ease-out, transform 0s 0.3s }
