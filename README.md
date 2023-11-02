@@ -1,4 +1,4 @@
-### Calcolatore ordini per il bar della scuola
+# Calcolatore ordini per il bar della scuola
 
 Questa web app è uno strumento che aiuta gli studenti che si occupano degli ordini per il bar, rendendo il calcolo del totale facile ed eliminando la possibilità di perdersi nei calcoli.
 
