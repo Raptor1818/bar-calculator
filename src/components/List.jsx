@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaSquarePlus, FaSquareMinus } from "react-icons/fa6";
 import { bar_items } from "./barItems";
+import CopyableOrderText from "./CopyableOrderText";
 
 function List() {
   const [order, setOrder] = useState([]);
@@ -43,6 +44,18 @@ function List() {
   const calculateTotal = () => { //Calcola la totale di tutti i item all'ordine
     return order.reduce((total, item) => total + item.price * item.quantity, 0);
   };
+
+  useEffect(() => {
+    const savedOrder = JSON.parse(localStorage.getItem("order"));
+    if (savedOrder) {
+      setOrder(savedOrder);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("order", JSON.stringify(order));
+  }, [order]);
+
   //Suddivisione in tre del menu
   const panini = bar_items.slice(0, 9);
   const altriPanini = bar_items.slice(9, 13);
@@ -160,6 +173,7 @@ function List() {
                   </li>
                 ))}
               </ul>
+              <CopyableOrderText order={order} />
             </div>
           )}
         </div>
