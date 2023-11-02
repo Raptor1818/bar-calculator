@@ -50,7 +50,7 @@ function CopyableOrderText({ order }) {
         </div>
       </div>
       <p className="text-md text-neutral-100 text-center mt-4">
-        Copia e manda nel gruppo di Whatsapp! Ricorda di aggiungere la classe e l' ora dell' ordine
+        Copia e manda nel gruppo di Whatsapp! Ricorda di aggiungere la classe e l'ora dell'ordine
       </p>
     </div>
   );
