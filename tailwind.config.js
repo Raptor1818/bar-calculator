@@ -8,6 +8,7 @@ export default {
     extend: {},
     fontFamily: {
       'roboto-mono': ['Roboto Mono'],
+      'nunito': ['Nunito'],
     },
   },
   plugins: [],
