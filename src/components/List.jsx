@@ -86,7 +86,7 @@ function List() {
                 {bar_items.map((item, index) => (
                   <div key={item.id}>
                     {(index === 0 || item.id === 10 || item.id === 14) && (
-                      <h2 className="text-xl font-semibold mt-2">
+                      <h2 className="text-xl font-bold mt-5">
                         {item.id === 1 ? "Panini" : item.id === 10 ? "Altri Panini" : "Menù Pranzo"}
                       </h2>
                     )}

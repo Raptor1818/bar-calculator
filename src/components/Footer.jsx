@@ -3,7 +3,7 @@ import GithubIcon from '/img/github.webp'
 
 const Footer = () => {
   return (
-    <div className='flex flex-col justify-center items-center gap-2 bg-[#121212] h-fit p-4 text-white border-t-[1px] border-[#202020]'>
+    <div className='flex flex-col justify-center items-center gap-2 bg-[#121212] h-fit p-4 text-white border-t-[1px] border-[#202020] font-roboto-mono'>
       <div>
         <p>© 2023 | Tutti i diritti riservati</p>
       </div>
