@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { FaSquarePlus, FaSquareMinus } from "react-icons/fa6";
 import { bar_items } from "./barItems";
@@ -9,7 +8,7 @@ function List() {
   const [flashItemId, setFlashItemId] = useState(null);
   const [showMenu, setShowMenu] = useState(true);
 
-  const addItemToOrder = (item) => {
+  const addItemToOrder = (item, selection) => {
     const existingItem = order.find((orderItem) => orderItem.id === item.id);
     const updatedOrder = existingItem
       ? order.map((orderItem) => (orderItem.id === item.id ? { ...orderItem, quantity: orderItem.quantity + 1 } : orderItem))
@@ -18,22 +17,34 @@ function List() {
     setFlashItemId(item.id);
     setTimeout(() => setFlashItemId(null), 300);
   };
-  
+
   const removeItemFromOrder = (itemToRemove) => {
     const updatedOrder = itemToRemove.quantity === 1
       ? order.filter((item) => item.id !== itemToRemove.id)
       : order.map((orderItem) => (orderItem.id === itemToRemove.id ? { ...orderItem, quantity: orderItem.quantity - 1 } : orderItem));
     setOrder(updatedOrder);
-  };  
+  };
 
-  const clearOrder = () => { //Rimuove tutti i nuovi item all'ordine
+  const clearOrder = () => {
     setOrder([]);
   };
 
-  const calculateTotal = () => 
+  const calculateTotal = () =>
     order.reduce(
-      (total, item) => total + item.price * item.quantity, 0
+      (total, item) => total + item.price * item.quantity,
+      0
     );
+
+  const handleSelectionChange = (e, item) => {
+    const selectedOption = e.target.value;
+    const updatedOrder = order.map((orderItem) =>
+      orderItem.id === item.id
+        ? { ...orderItem, selectedOption }
+        : orderItem
+    );
+    setOrder(updatedOrder);
+  };
+  
 
   useEffect(() => {
     const savedOrder = JSON.parse(localStorage.getItem("order"));
@@ -87,34 +98,56 @@ function List() {
                       <h2 className="text-xl font-bold mt-5">
                         {item.id === 1 ? "Panini" : item.id === 10 ? "Altri Panini" : "Menù Pranzo"}
                       </h2>
-                    )}  
+                    )}
                     <li
-                      className={`my-2 flex justify-between rounded-md border-solid border-[1px] shadow-neutral-900 shadow-md ${
+                      className={`my-2 flex flex-row justify-between items-center rounded-md border-solid border-[1px] shadow-neutral-900 shadow-md ${
                         flashItemId === item.id ? "border-[#47ff47]" : "border-neutral-400"
                       } transition duration-200 ease-out`}
                     >
-                      <div>
-                        <p className="p-2">{item.name}</p>
+                      <div className="p-2">
+                        <p>{item.name}</p>
+                        <div className="flex-row flex">
+                          <p className="text-neutral-400 text-sm">{item.desc}</p>
+                          {item.selections ? (
+                            <select
+                              className="w-full md:w-fit text-sm border-solid border-[1px] px-2 border-neutral-400 bg-neutral-800 rounded-md text-white font-nunito"
+                              onChange={(e) => handleSelectionChange(e, item)}
+                              defaultValue="Seleziona" // Imposta "Seleziona" come valore predefinito
+                            >
+                              <option disabled hidden value="Seleziona">
+                                Seleziona
+                              </option>
+                              {item.selections.map((option) => (
+                                <option key={option} value={option}>
+                                  {option}
+                                </option>
+                              ))}
+                            </select>
+                          ) : (
+                            null
+                          )}
+                        </div>
+
                       </div>
-                      <div className="flex justify-between">
-                        <div className="mr-1">
-                          <p className="p-2 font-roboto-mono">€{item.price.toFixed(2)}</p>
+                      <div className="flex justify-between p-2">
+                        <div className="mr-1 pt-2">
+                          <p className="font-roboto-mono">€{item.price.toFixed(2)}</p>
                         </div>
                         <div>
-                          <button
-                            className="h-10 w-10 flex items-center justify-center"
-                            onClick={() => addItemToOrder(item)}
-                          >
-                            <FaSquarePlus className="text-3xl" />
-                          </button>
+                            <button
+                              className="h-10 w-10 flex items-center justify-center"
+                              onClick={() => addItemToOrder(item)}
+                            >
+                              <FaSquarePlus className="text-3xl" />
+                            </button>
                         </div>
-                      </div>  
+                      </div>
                     </li>
                   </div>
                 ))}
               </ul>
             </div>
-          ) : (  // ---------------------- sezione ordine ------------------------------------------------------------------
+          ) : (
             <div className="">
               <div className="flex flex-col justify-between items-center">
                 <div>
@@ -136,7 +169,7 @@ function List() {
                 {order.map((item, index) => (
                   <li
                     className="my-2 flex justify-between rounded-md border-solid border-[1px] border-neutral-400 shadow-neutral-900 shadow-md"
-                    key={item.id}  
+                    key={item.id}
                   >
                     <div className="flex flex-row">
                       <p className="p-2">{item.name}</p>
@@ -162,11 +195,7 @@ function List() {
           )}
         </div>
       </div>
-      {showMenu ? (
-        null
-      ) : (
-        <CopyableOrderText order={order} />
-      )}
+      {showMenu ? null : <CopyableOrderText order={order} />}
     </div>
   );
 }

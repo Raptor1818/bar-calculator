@@ -41,3 +41,7 @@
   transform: translateX(-60%);
   transition: opacity 0.3s ease-out, transform 0s 0.3s;
 }
+
+select {
+  font-family: 'Nunito', sans-serif;
+}
