@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: 'Roboto Mono';
-  src: url('../public/fonts/RobotoMono-VariableFont_wght.ttf');
+  src: url('/fonts/RobotoMono-VariableFont_wght.ttf');
 }
 
 button:focus {
