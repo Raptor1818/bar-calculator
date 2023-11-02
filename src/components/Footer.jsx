@@ -3,7 +3,7 @@ import GithubIcon from '/img/github.webp'
 
 const Footer = () => {
   return (
-    <div className='flex flex-col justify-center items-center gap-2 bg-[#121212] h-fit p-4 text-white border-t-[1px] border-[#202020] font-roboto-mono'>
+    <div className='flex flex-col justify-center items-center gap-2 bg-[#121212] h-fit p-4 text-neutral-500 text-sm border-t-[1px] border-[#202020] font-roboto-mono'>
       <div>
         <p>© 2023 | Tutti i diritti riservati</p>
       </div>
@@ -12,11 +12,11 @@ const Footer = () => {
         Ideato e sviluppato da {" "}
         <a
           href="https://raptorino.com"
-          className="w-fit h-fit relative bg-gradient-to-r from-amber-700 to-yellow-400 bg-clip-text text-transparent"
+          className="w-fit h-fit relative bg-gradient-to-r from-amber-800 to-yellow-500 bg-clip-text text-transparent"
           target="_blank"
         >
           Francesco Nisi
-          <span className="absolute inset-x-0 bottom-0 w-full h-[2px] bg-gradient-to-r from-amber-700 to-yellow-400"></span>
+          <span className="absolute inset-x-0 bottom-0 w-full h-[2px] bg-gradient-to-r from-amber-800 to-yellow-500"></span>
         </a>
       </p>
 
