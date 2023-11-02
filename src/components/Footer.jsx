@@ -16,7 +16,7 @@ const Footer = () => {
             className="w-fit h-fit relative bg-gradient-to-r from-amber-800 to-yellow-500 bg-clip-text text-transparent"
             target="_blank"
           >
-            Francesco Nisi
+            Francesco
             <span className="absolute inset-x-0 bottom-0 w-full h-[2px] bg-gradient-to-r from-amber-800 to-yellow-500"></span>
           </a>
         </p>
