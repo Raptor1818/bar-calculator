@@ -62,7 +62,7 @@ function List() {
   const menuPranzo = bar_items.slice(13);
 
   return (
-    <div className="bg-[#121212] min-h-screen text-white py-8 px-4 flex flex-col items-center font-nunito">
+    <div className="bg-[#121212] min-h-screen text-white py-8 px-4 md:px-32 flex flex-col items-center font-nunito">
       <h1 className="text-4xl font-extrabold bg-gradient-to-br from-amber-700 to-yellow-400 bg-clip-text text-transparent mb-8 text-center h-fit w-fit p-1">
         Calcolatore ordini per il bar
       </h1>
@@ -73,7 +73,7 @@ function List() {
             showMenu
               ? "bg-gradient-to-br from-amber-700 to-yellow-400"
               : "bg-gradient-to-br from-neutral-700 to-neutral-400"
-          } shadow-md shadow-black text-white font-semibold transition duration-200ms ease-out`}
+          } shadow-md shadow-black text-white font-semibold transition duration-200 ease-out`}
           onClick={() => setShowMenu(true)}
         >
           Menù
@@ -83,14 +83,14 @@ function List() {
             showMenu
               ? "bg-gradient-to-br from-neutral-700 to-neutral-400"
               : "bg-gradient-to-br from-amber-700 to-yellow-400"
-          } shadow-md shadow-black text-white font-semibold transition duration-200ms ease-out`}
+          } shadow-md shadow-black text-white font-semibold transition duration-200 ease-out`}
           onClick={() => setShowMenu(false)}
         >
           Ordine
         </button>
       </div>
 
-      <div className="rounded-md bg-[#303030] shadow-md shadow-black p-4 w-full md:w-1/3">
+      <div className="rounded-md bg-[#303030] shadow-md shadow-black p-4 w-full min-w-[33%] md:max-w-3xl">
         <div className="gap-4">
           {showMenu ? (
             <div>
@@ -105,7 +105,7 @@ function List() {
                     )}
                     <li
                       className={`my-2 flex justify-between rounded-md border-solid border-[1px] shadow-neutral-900 shadow-md ${
-                        flashItemId === item.id ? "border-[#47ff47]" : "border-white"
+                        flashItemId === item.id ? "border-[#47ff47]" : "border-neutral-400"
                       } transition duration-200 ease-out`}
                     >
                       <div>
@@ -135,12 +135,12 @@ function List() {
                 <div>
                   <h2 className="text-2xl font-bold">Ordine</h2>
                 </div>
-                <div className="flex justify-between w-full mt-2">
+                <div className="flex justify-between w-full mt-3">
                   <p className="text-xl font-medium font-roboto-mono">
                     Totale: €{calculateTotal().toFixed(2)}
                   </p>
                   <button
-                    className="border-solid border-[1px] rounded-md px-2 py-1 shadow-neutral-900 shadow-md"
+                    className="border-solid border-[1px] border-neutral-400 rounded-md px-2 py-1 shadow-neutral-900 shadow-md"
                     onClick={() => clearOrder()}
                   >
                     Clear
@@ -150,7 +150,7 @@ function List() {
               <ul>
                 {order.map((item, index) => (
                   <li
-                    className="my-2 flex justify-between rounded-md border-solid border-[1px] shadow-neutral-900 shadow-md"
+                    className="my-2 flex justify-between rounded-md border-solid border-[1px] border-neutral-400 shadow-neutral-900 shadow-md"
                     key={item.id}
                   >
                     <div className="flex flex-row">
@@ -173,11 +173,15 @@ function List() {
                   </li>
                 ))}
               </ul>
-              <CopyableOrderText order={order} />
             </div>
           )}
         </div>
       </div>
+      {showMenu ? (
+        null
+      ) : (
+        <CopyableOrderText order={order} />
+      )}
     </div>
   );
 }
