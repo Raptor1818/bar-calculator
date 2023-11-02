@@ -1,6 +1,5 @@
-import { useState } from "react";
-import { FaSquarePlus } from "react-icons/fa6";
-import { FaSquareMinus } from "react-icons/fa6";
+import React, { useState } from "react";
+import { FaSquarePlus, FaSquareMinus } from "react-icons/fa6";
 import { bar_items } from "./barItems";
 
 function List() {
@@ -8,12 +7,7 @@ function List() {
   const [flashItemId, setFlashItemId] = useState(null);
   const [showMenu, setShowMenu] = useState(true);
 
-    // Suddividi gli articoli in tre sezioni
-    const panini = bar_items.slice(0, 9); // Dal 1 al 9
-    const altriPanini = bar_items.slice(9, 13); // Dal 10 al 13
-    const menuPranzo = bar_items.slice(13); // Dal 14 all'ultimo
-
-  const addItemToOrder = (item) => { //Aggiunge un articolo all'ordine
+  const addItemToOrder = (item) => { //Aggiunge un nuovo item all'ordine
     const existingItem = order.find((orderItem) => orderItem.id === item.id);
     if (existingItem) {
       const updatedOrder = order.map((orderItem) =>
@@ -25,12 +19,11 @@ function List() {
     } else {
       setOrder([...order, { ...item, quantity: 1 }]);
     }
-
     setFlashItemId(item.id);
     setTimeout(() => setFlashItemId(null), 300);
   };
 
-  const removeItemFromOrder = (itemToRemove) => { //Rimuove un articolo all'ordine
+  const removeItemFromOrder = (itemToRemove) => { //Rimuove un nuovo item all'ordine
     if (itemToRemove.quantity === 1) {
       setOrder(order.filter((item) => item.id !== itemToRemove.id));
     } else {
@@ -43,28 +36,22 @@ function List() {
     }
   };
 
-  const clearOrder = () => { //Rimuove tutti gli articoli all'ordine
+  const clearOrder = () => { //Rimuove tutti i nuovi item all'ordine
     setOrder([]);
   };
 
-  const calculateTotal = () => { //Calcola il totale di tutti gli articoli all'ordine
+  const calculateTotal = () => { //Calcola la totale di tutti i item all'ordine
     return order.reduce((total, item) => total + item.price * item.quantity, 0);
   };
-
-  const groupedOrder = order.reduce((acc, item) => { //Aggiunge tutti gli articoli all'ordine in un array
-    const existingItem = acc.find((groupedItem) => groupedItem.id === item.id);
-    if (existingItem) {
-      existingItem.quantity += item.quantity;
-    } else {
-      acc.push({ ...item });
-    }
-    return acc;
-  }, []);
+  //Suddivisione in tre del menu
+  const panini = bar_items.slice(0, 9);
+  const altriPanini = bar_items.slice(9, 13);
+  const menuPranzo = bar_items.slice(13);
 
   return (
     <div className="bg-[#121212] min-h-screen text-white py-8 px-4 flex flex-col items-center">
       <h1 className="text-4xl font-extrabold bg-gradient-to-br from-amber-700 to-yellow-400 bg-clip-text text-transparent mb-8 text-center h-fit w-fit p-1">
-        Calcolatore per il bar
+        Calcolatore ordini per il bar
       </h1>
 
       <div className="text-center mb-4">
@@ -76,20 +63,20 @@ function List() {
           } shadow-md shadow-black text-white font-semibold transition duration-200ms ease-out`}
           onClick={() => setShowMenu(true)}
         >
-          Menu
+          Menù
         </button>
         <button
           className={`p-2 rounded-md ${
             showMenu
               ? "bg-gradient-to-br from-neutral-700 to-neutral-400"
               : "bg-gradient-to-br from-amber-700 to-yellow-400"
-          } shadow-md shadow-black text-white font-semibold transition duration-200 ease-out`}
+          } shadow-md shadow-black text-white font-semibold transition duration-200ms ease-out`}
           onClick={() => setShowMenu(false)}
         >
           Ordine
         </button>
       </div>
-      
+
       <div className="rounded-md bg-[#303030] shadow-md shadow-black p-4 w-full md:w-1/3">
         <div className="gap-4">
           {showMenu ? (
@@ -98,11 +85,11 @@ function List() {
               <ul>
                 {bar_items.map((item, index) => (
                   <div key={item.id}>
-                    {index === 0 || item.id === 10 || item.id === 14 ? (
+                    {(index === 0 || item.id === 10 || item.id === 14) && (
                       <h2 className="text-xl font-semibold mt-2">
-                        {item.id === 1 ? "Panini" : item.id === 10 ? "Altri Panini" : "Menu Pranzo"}
+                        {item.id === 1 ? "Panini" : item.id === 10 ? "Altri Panini" : "Menù Pranzo"}
                       </h2>
-                    ) : null}
+                    )}
                     <li
                       className={`my-2 flex justify-between rounded-md border-solid border-[1px] shadow-neutral-900 shadow-md ${
                         flashItemId === item.id ? "border-[#47ff47]" : "border-white"
@@ -148,20 +135,16 @@ function List() {
                 </div>
               </div>
               <ul>
-                {groupedOrder.map((item) => (
+                {order.map((item, index) => (
                   <li
                     className="my-2 flex justify-between rounded-md border-solid border-[1px] shadow-neutral-900 shadow-md"
                     key={item.id}
                   >
                     <div className="flex flex-row">
-                      <p className="p-2">
-                        {item.name}
-                      </p>
+                      <p className="p-2">{item.name}</p>
                     </div>
                     <div className="flex justify-between">
-                      <p className="p-2 text-right">
-                        {item.quantity > 1 && `x${item.quantity} `}
-                      </p>
+                      <p className="p-2 text-right">{item.quantity > 1 && `x${item.quantity} `}</p>
                       <div className="mr-1">
                         <p className="p-2">€{(item.price * item.quantity).toFixed(2)}</p>
                       </div>
