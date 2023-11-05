@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
-import { FaSquarePlus, FaSquareMinus } from "react-icons/fa6";
+import { FaSquarePlus, FaSquareMinus, FaChevronDown, FaChevronUp } from "react-icons/fa6";
 import { bar_items } from "./barItems";
 import CopyableOrderText from "./CopyableOrderText";
 
@@ -8,6 +8,11 @@ function List() {
   const [order, setOrder] = useState([]);
   const [flashItemId, setFlashItemId] = useState(null);
   const [showMenu, setShowMenu] = useState(true);
+  const [isTramezziniOpen, setIsTramezziniOpen] = useState(false);
+  const [isPizzetteOpen, setIsPizzetteOpen] = useState(false);
+
+  const toggleTramezzini = () => setIsTramezziniOpen(!isTramezziniOpen);
+  const togglePizzette = () => setIsPizzetteOpen(!isPizzetteOpen);
 
   const addItemToOrder = (item) => {
     const existingItem = order.find((orderItem) => orderItem.id === item.id);
@@ -87,28 +92,47 @@ function List() {
                           {item.id === 1 ? "Panini" : item.id === 10 ? "Altri Panini" : "Menù Pranzo"}
                         </h2>
                       )}
-                      <li
-                        className={`my-2 flex flex-row justify-between items-center rounded-md border-solid border-[1px] shadow-neutral-900 shadow-md ${
-                          flashItemId === item.id ? "border-[#47ff47]" : "border-neutral-400"
-                        } transition duration-200 ease-out`}
-                      >
-                        <div className="p-2">
-                          <p>{item.name}</p>
-                          <div className="flex-row flex">
-                            <p className="text-neutral-400 text-sm">{item.desc}</p>
+                      {(item.id === 10 || item.id === 14) && (
+                        <li
+                          className="my-2 flex flex-row justify-between items-center rounded-md border-solid border-[1px] shadow-neutral-900 shadow-md border-neutral-400 transition duration-200 ease-out cursor-pointer"
+                          onClick={item.id === 10 ? toggleTramezzini : togglePizzette}
+                        >
+                          <div className="p-2">
+                            <p>{item.id === 10 ? "Tramezzini:" : "Pizzette:"}</p>
                           </div>
-                        </div>
-                        <div className="flex justify-between p-2">
-                          <div className="mr-1 pt-2">
-                            <p className="font-roboto-mono">€{item.price.toFixed(2)}</p>
+                          <div className="flex justify-between p-2">
+                            <div>
+                              {item.id === 10 ? 
+                                (isTramezziniOpen ? <FaChevronUp className="text-3xl" /> : <FaChevronDown className="text-3xl" />) :
+                                (isPizzetteOpen ? <FaChevronUp className="text-3xl" /> : <FaChevronDown className="text-3xl" />)}
+                            </div>
                           </div>
-                          <div>
-                          <button className="h-10 w-10 flex items-center justify-center" onClick={() => addItemToOrder(item)} title="Aggiungi" role="button" aria-label="Aggiungi" type="button">
-                            <FaSquarePlus className="text-3xl" />
-                          </button>
+                        </li>
+                      )}
+                      {((item.id >= 10 && item.id < 14 && isTramezziniOpen) || 
+                        (item.id >= 14 && item.id < 19 && isPizzetteOpen) || 
+                        (item.id < 10 || item.id >= 19)) && (
+                        <li
+                          className={`my-2 flex flex-row justify-between items-center rounded-md border-solid border-[1px] shadow-neutral-900 shadow-md ${flashItemId === item.id ? "border-[#47ff47]" : "border-neutral-400"} transition duration-200 ease-out`}
+                        >
+                          <div className="p-2">
+                            <p>{item.name}</p>
+                            <div className="flex-row flex">
+                              <p className="text-neutral-400 text-sm">{item.desc}</p>
+                            </div>
                           </div>
-                        </div>
-                      </li>
+                          <div className="flex justify-between p-2">
+                            <div className="mr-1 pt-2">
+                              <p className="font-roboto-mono">€{item.price.toFixed(2)}</p>
+                            </div>
+                            <div>
+                              <button className="h-10 w-10 flex items-center justify-center" onClick={() => addItemToOrder(item)} title="Aggiungi" role="button" aria-label="Aggiungi" type="button">
+                                <FaSquarePlus className="text-3xl" />
+                              </button>
+                            </div>
+                          </div>
+                        </li>
+                      )}
                     </div>
                   ))}
                 </ul>
