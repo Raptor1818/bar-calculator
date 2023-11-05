@@ -13,4 +13,5 @@ Questa web app è uno strumento che aiuta gli studenti che si occupano degli ord
 ## Contributori
 - [Francesco](https://github.com/Raptor1818) (ideatore e creatore),
 - [Matteo](https://github.com/Matteo0099) (contributor),
-- [Noyaz](https://github.com/snakeout96) (contributor)
+- [Noyaz](https://github.com/snakeout96) (contributor),
+- [Federico](https://github.com/federr532) (contributor)

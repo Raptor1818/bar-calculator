@@ -47,7 +47,7 @@ function List() {
       <div className="text-center mb-6"> {/* equal space */}
         <button
           title="Menu" role="button" aria-label="Menu" type="button"
-          className={`mr-4 font-roboto-mono uppercase px-6 py-[.675rem] rounded-md ${
+          className={`mr-4 font-roboto-mono px-6 py-3 rounded-md ${
             showMenu
               ? "bg-gradient-to-br from-amber-700 to-yellow-400"
               : "bg-gradient-to-br from-neutral-700 to-neutral-400"
@@ -59,7 +59,7 @@ function List() {
         </button>
         <button
           title="Ordine" role="button" aria-label="Ordine" type="button"
-          className={` font-roboto-mono uppercase px-6 py-[.675rem] rounded-md ${
+          className={`font-roboto-mono px-6 py-3 rounded-md ${
             showMenu
               ? "bg-gradient-to-br from-neutral-700 to-neutral-400"
               : "bg-gradient-to-br from-amber-700 to-yellow-400"
@@ -78,45 +78,47 @@ function List() {
           {showMenu ? (
             <div className="min-h-screen mt-4 mb-8">
               <h2 className="text-2xl md:text-3xl lg:text-4xl text-center font-bold mt-5">Menù</h2>
-              <ul className="mt-2 px-2 md:px-3">
-                {bar_items.map((item, index) => (
-                  <div key={item.id}>
-                    {(index === 0 || item.id === 10 || item.id === 14) && (
-                      <h2 className="text-xl font-bold mt-6 lg:mt-8">
-                        {item.id === 1 ? "Panini" : item.id === 10 ? "Altri Panini" : "Menù Pranzo"}
-                      </h2>
-                    )}
-                    <li
-                      className={`my-2 flex flex-row justify-between items-center rounded-md border-solid border-[1px] shadow-neutral-900 shadow-md ${
-                        flashItemId === item.id ? "border-[#47ff47]" : "border-neutral-400"
-                      } transition duration-200 ease-out`}
-                    >
-                      <div className="p-2">
-                        <p>{item.name}</p>
-                        <div className="flex-row flex">
-                          <p className="text-neutral-400 text-sm">{item.desc}</p>
+              <div className="flex justify-between w-full pt-3 ">
+                <ul className="px-2 md:px-3 border-t-[1px] border-solid border-neutral-500">
+                  {bar_items.map((item, index) => (
+                    <div key={item.id}>
+                      {(index === 0 || item.id === 10 || item.id === 20) && (
+                        <h2 className="text-xl font-bold mt-6 lg:mt-8">
+                          {item.id === 1 ? "Panini" : item.id === 10 ? "Altri Panini" : "Menù Pranzo"}
+                        </h2>
+                      )}
+                      <li
+                        className={`my-2 flex flex-row justify-between items-center rounded-md border-solid border-[1px] shadow-neutral-900 shadow-md ${
+                          flashItemId === item.id ? "border-[#47ff47]" : "border-neutral-400"
+                        } transition duration-200 ease-out`}
+                      >
+                        <div className="p-2">
+                          <p>{item.name}</p>
+                          <div className="flex-row flex">
+                            <p className="text-neutral-400 text-sm">{item.desc}</p>
+                          </div>
                         </div>
-                      </div>
-                      <div className="flex justify-between p-2">
-                        <div className="mr-1 pt-2">
-                          <p className="font-roboto-mono">€{item.price.toFixed(2)}</p>
+                        <div className="flex justify-between p-2">
+                          <div className="mr-1 pt-2">
+                            <p className="font-roboto-mono">€{item.price.toFixed(2)}</p>
+                          </div>
+                          <div>
+                          <button className="h-10 w-10 flex items-center justify-center" onClick={() => addItemToOrder(item)} title="Aggiungi" role="button" aria-label="Aggiungi" type="button">
+                            <FaSquarePlus className="text-3xl" />
+                          </button>
+                          </div>
                         </div>
-                        <div>
-                        <button className="h-10 w-10 flex items-center justify-center" onClick={() => addItemToOrder(item)} title="Aggiungi" role="button" aria-label="Aggiungi" type="button">
-                          <FaSquarePlus className="text-3xl" />
-                        </button>
-                        </div>
-                      </div>
-                    </li>
-                  </div>
-                ))}
-              </ul>
+                      </li>
+                    </div>
+                  ))}
+                </ul>
+              </div>
             </div>
           ) : (
-            <div className="">
+            <div className="px-2 py-2">
               <div className="flex flex-col justify-between items-center">
                 <div>
-                  <h2 className="text-3xl font-bold">Ordine</h2>
+                <h2 class="text-2xl md:text-3xl lg:text-4xl text-center font-bold mt-4">Ordine</h2>
                 </div>
                 <div className="flex justify-between w-full mt-3 pt-3 border-t-[1px] border-solid border-neutral-500">
                   <p className="text-xl font-medium font-roboto-mono">
