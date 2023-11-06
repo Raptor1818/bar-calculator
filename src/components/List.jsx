@@ -159,8 +159,8 @@ function List() {
                   <li className="my-2 flex justify-between rounded-md border-solid border-[1px] border-neutral-400 shadow-neutral-900 shadow-md"
                     key={item.id}
                   >
-                    <div className="flex flex-row">
-                      <p className="p-2">{item.name}</p>
+                    <div>
+                      <p className="p-2 break-words">{item.name}</p>
                     </div>
                     <div className="flex justify-between">
                       <p className="p-2 text-right font-roboto-mono">{item.quantity > 1 && `x${item.quantity} `}</p>

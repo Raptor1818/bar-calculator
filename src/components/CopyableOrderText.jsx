@@ -32,10 +32,10 @@ function CopyableOrderText({ order }) {
         </div>
       </div>
       <div className="flex flex-row justify-between border-solid border-[1px] shadow-md shadow-black border-neutral-400 rounded-md bg-black font-roboto-mono">
-        <div className="w-full p-4">
+        <div className="w-full p-4 overflow-scroll">
           <pre>{getOrderText()}</pre>
         </div>
-        <div className="fixed w-fit h-fit px-1 py-2 select-none border-solid border-l-[1px] border-b-[1px] rounded-bl-md border-neutral-400 z-10">
+        <div className="w-fit h-fit px-1 py-2 select-none border-solid border-l-[1px] border-b-[1px] rounded-bl-md border-neutral-400 z-10">
           <button
             className="bg-transparent text-white font-semibold px-2 py-1 shadow-md"
             onClick={copyToClipboard}
@@ -57,4 +57,4 @@ function CopyableOrderText({ order }) {
 
 export default CopyableOrderText;
 
-//TODO: Fixare il fatto che i tramezzini con i nomi lunghi fanno overflow al bottone [-] nel list item e al bottone per copiare il testo
+//TODO: Fixare il fatto che i tramezzini con i nomi lunghi fanno overflow
