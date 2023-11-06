@@ -3,16 +3,57 @@ import React from "react";
 import GithubIcon from "/img/github.webp";
 
 const Footer = () => {
+  const raptorino = "https://raptorino.com";
+  const zippo = "https://matteomania.netlify.app";
   let dt = new Date(); let crntYear = dt.getFullYear()
   return (
     <div className="bg-[#121212] h-fit text-neutral-500 text-sm font-roboto-mono items-center justify-center flex flex-col">
       <div className="border-t-[1px] border-[#202020] w-[95%] flex flex-col justify-center items-center gap-2 p-4">
         <div><p className="text-neutral-300">© { crntYear } | Tutti i diritti riservati</p></div>
         <div>
-          <p>Crediti ed informazioni</p>
-        </div>
-        <div>
-          <p>v</p>
+          <p className="text-neutral-300"> Ideato e sviluppato da {" "}
+            <a
+              href={raptorino}
+              className="w-fit h-fit relative bg-gradient-to-r from-amber-800 to-yellow-500 bg-clip-text text-transparent"
+              target="_blank"
+              rel="noreferrer"
+              title="Author Francesco Nisi"
+              alt="Author Francesco Nisi"
+              role="link"
+              aria-label="Author Francesco Nisi"
+            >
+              {" "} Francesco
+              <span className="absolute inset-x-0 bottom-0 w-full h-[2px] bg-gradient-to-r from-amber-600 to-yellow-400"></span>
+            </a>
+            ,
+            <a
+              href={zippo}
+              className="w-fit h-fit relative bg-gradient-to-r from-amber-600 to-yellow-400 bg-clip-text text-transparent"
+              target="_blank"
+              rel="noreferrer"
+              title="Author Matteo Manià"
+              alt="Author Matteo Manià"
+              role="link"
+              aria-label="Author Matteo Manià"
+            >
+              Matteo
+              <span className="absolute inset-x-0 bottom-0 w-full h-[2px] bg-gradient-to-r from-amber-600 to-yellow-400"></span>
+            </a>
+            {""} & {""}
+            <a
+              href="https://bar-calculator.vercel.app"
+              className="w-fit h-fit relative bg-gradient-to-r from-amber-600 to-yellow-400 bg-clip-text text-transparent"
+              target="_blank"
+              rel="noreferrer"
+              alt="Noyaz"
+              role="link"
+              title="Noyaz"
+              aria-label="Noyaz"
+            >
+              {" "} Noyaz
+              <span className="absolute inset-x-0 bottom-0 w-full h-[2px] bg-gradient-to-r from-amber-600 to-yellow-400"></span>
+            </a>
+          </p>
         </div>
         <div className="mt-2">
           <a

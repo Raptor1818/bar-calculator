@@ -83,7 +83,7 @@ function List() {
           {showMenu ? (
             <div className="min-h-screen mt-4 mb-8">
               <h2 className="text-2xl md:text-3xl lg:text-4xl text-center font-bold mt-5">Menù</h2>
-              <div className="flex justify-between w-full pt-3 ">
+              <div className="flex justify-between mx-auto w-fit pt-3">
                 <ul className="px-2 md:px-3 border-t-[1px] border-solid border-neutral-500">
                   {bar_items.map((item, index) => (
                     <div key={item.id}>
@@ -94,7 +94,7 @@ function List() {
                       )}
                       {(item.id === 10 || item.id === 14) && (
                         <li
-                          className="my-2 flex flex-row justify-between items-center rounded-md border-solid border-[1px] shadow-neutral-900 shadow-md border-neutral-400 transition duration-200 ease-out cursor-pointer"
+                          className="my-2 listHidden  flex flex-row justify-between items-center rounded-md border-solid border-[1px] shadow-neutral-900 shadow-md border-neutral-400 transition duration-200 ease-out cursor-pointer"
                           onClick={item.id === 10 ? toggleTramezzini : togglePizzette}
                         >
                           <div className="p-2">
@@ -112,6 +112,7 @@ function List() {
                       {((item.id >= 10 && item.id < 14 && isTramezziniOpen) || 
                         (item.id >= 14 && item.id < 19 && isPizzetteOpen) || 
                         (item.id < 10 || item.id >= 19)) && (
+                        /*to add: class listHidden on children of toggle droplist */
                         <li
                           className={`my-2 flex flex-row justify-between items-center rounded-md border-solid border-[1px] shadow-neutral-900 shadow-md ${flashItemId === item.id ? "border-[#47ff47]" : "border-neutral-400"} transition duration-200 ease-out`}
                         >
@@ -142,7 +143,7 @@ function List() {
             <div className="px-2 py-2">
               <div className="flex flex-col justify-between items-center">
                 <div>
-                <h2 class="text-2xl md:text-3xl lg:text-4xl text-center font-bold mt-4">Ordine</h2>
+                  <h2 className="text-2xl md:text-3xl lg:text-4xl text-center font-bold mt-4">Ordine</h2>
                 </div>
                 <div className="flex justify-between w-full mt-3 pt-3 border-t-[1px] border-solid border-neutral-500">
                   <p className="text-xl font-medium font-roboto-mono">
