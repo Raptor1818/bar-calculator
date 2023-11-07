@@ -29,7 +29,7 @@ function CopyableOrderText({ order }) {
   }, [copied]);  
 
   return (
-    <div className="my-4 w-full max-w-3xl">
+    <div className="my-4 w-full md:w-fit max-w-3xl">
       <div className="flex flex-row justify-between">
         <div></div>
         <div className="relative">
