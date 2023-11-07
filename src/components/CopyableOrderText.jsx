@@ -17,11 +17,16 @@ function CopyableOrderText({ order }) {
   };
 
   useEffect(() => {
+    let timeoutId;
     if (copied) {
-      const timeoutId = setTimeout(() => setCopied(false), 2000);
-      return () => clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => setCopied(false), 2000);
     }
-  }, [copied]);
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, [copied]);  
 
   return (
     <div className="my-4 w-full max-w-3xl">
