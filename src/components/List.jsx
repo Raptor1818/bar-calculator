@@ -78,12 +78,13 @@ function List() {
 
       <div className="rounded-md bg-[#303030] shadow-md shadow-black 
           my-2 lg:my-4 py-0 px-2 w-full flex flex-col justify-center items-center
-          min-h-[150px] min-w-[33%] md:max-w-3xl">
-        <div className="gap-4 w-full max-w-3xl">
+          min-h-[150px] min-w-[33%] md:max-w-2xl">
+        <div className="gap-4 w-full max-w-2xl">
           {showMenu ? (
             <div className="min-h-screen mt-4 mb-8">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl text-center font-bold mt-5">Menù</h2>
-              <div className="flex justify-between mx-auto w-fit pt-3">
+              <h2 className="text-2xl md:text-2xl lg:text-4xl text-center font-bold mt-5">Menù</h2>
+              {/* issues with this */}
+              <div className="w-full max-w-2xl pt-3">
                 <ul className="px-2 md:px-3 border-t-[1px] border-solid border-neutral-500">
                   {bar_items.map((item, index) => (
                     <div key={item.id}>
@@ -94,7 +95,7 @@ function List() {
                       )}
                       {(item.id === 10 || item.id === 14) && (
                         <li
-                          className="my-2 listHidden  flex flex-row justify-between items-center rounded-md border-solid border-[1px] shadow-neutral-900 shadow-md border-neutral-400 transition duration-200 ease-out cursor-pointer"
+                          className="my-2 listHeader toggle flex flex-row justify-between items-center rounded-md border-solid border-[1px] shadow-neutral-900 shadow-md border-neutral-400 transition duration-200 ease-out cursor-pointer"
                           onClick={item.id === 10 ? toggleTramezzini : togglePizzette}
                         >
                           <div className="p-2">
@@ -109,10 +110,7 @@ function List() {
                           </div>
                         </li>
                       )}
-                      {((item.id >= 10 && item.id < 14 && isTramezziniOpen) || 
-                        (item.id >= 14 && item.id < 19 && isPizzetteOpen) || 
-                        (item.id < 10 || item.id >= 19)) && (
-                        /*to add: class listHidden on children of toggle droplist */
+                      {(item.id < 10 || item.id >= 19) && (
                         <li
                           className={`my-2 flex flex-row justify-between items-center rounded-md border-solid border-[1px] shadow-neutral-900 shadow-md ${flashItemId === item.id ? "border-[#47ff47]" : "border-neutral-400"} transition duration-200 ease-out`}
                         >
@@ -133,6 +131,55 @@ function List() {
                             </div>
                           </div>
                         </li>
+                      ) || (
+                        // to implement div with border around underList
+                        (item.id >= 10 && item.id <= 13 && isTramezziniOpen) &&
+                        (
+                          <li
+                            className={`listHidden tramez my-2 flex flex-row justify-between items-center rounded-md border-solid border-[1px] shadow-neutral-900 shadow-md ${flashItemId === item.id ? "border-[#47ff47]" : "border-neutral-400"} transition duration-200 ease-out`}
+                          >
+                            <div className="p-2">
+                              <p>{item.name}</p>
+                              <div className="flex-row flex">
+                                <p className="text-neutral-400 text-sm">{item.desc}</p>
+                              </div>
+                            </div>
+                            <div className="flex justify-between p-2">
+                              <div className="mr-1 pt-2">
+                                <p className="font-roboto-mono">€{item.price.toFixed(2)}</p>
+                              </div>
+                              <div>
+                                <button className="h-10 w-10 flex items-center justify-center" onClick={() => addItemToOrder(item)} title="Aggiungi" role="button" aria-label="Aggiungi" type="button">
+                                  <FaSquarePlus className="text-3xl" />
+                                </button>
+                              </div>
+                            </div>
+                          </li>
+                        )
+                      ) || (
+                        (item.id >= 14 && item.id <= 18 && isPizzetteOpen) &&
+                        (
+                          <li
+                            className={`listHidden pizz my-2 flex flex-row justify-between items-center rounded-md border-solid border-[1px] shadow-neutral-900 shadow-md ${flashItemId === item.id ? "border-[#47ff47]" : "border-neutral-400"} transition duration-200 ease-out`}
+                          >
+                            <div className="p-2">
+                              <p>{item.name}</p>
+                              <div className="flex-row flex">
+                                <p className="text-neutral-400 text-sm">{item.desc}</p>
+                              </div>
+                            </div>
+                            <div className="flex justify-between p-2">
+                              <div className="mr-1 pt-2">
+                                <p className="font-roboto-mono">€{item.price.toFixed(2)}</p>
+                              </div>
+                              <div>
+                                <button className="h-10 w-10 flex items-center justify-center" onClick={() => addItemToOrder(item)} title="Aggiungi" role="button" aria-label="Aggiungi" type="button">
+                                  <FaSquarePlus className="text-3xl" />
+                                </button>
+                              </div>
+                            </div>
+                          </li>
+                        )
                       )}
                     </div>
                   ))}
