@@ -117,7 +117,7 @@ function List() {
                           <div className="p-2">
                             <p>{item.name}</p>
                             <div className="flex-row flex">
-                              <p className="text-neutral-400 text-sm">{item.desc}</p>
+                              <p className="text-neutral-200 text-sm">{item.desc}</p>
                             </div>
                           </div>
                           <div className="flex justify-between p-2">
@@ -141,7 +141,7 @@ function List() {
                             <div className="p-2">
                               <p>{item.name}</p>
                               <div className="flex-row flex">
-                                <p className="text-neutral-400 text-sm">{item.desc}</p>
+                                <p className="text-neutral-200 text-sm">{item.desc}</p>
                               </div>
                             </div>
                             <div className="flex justify-between p-2">
@@ -165,7 +165,7 @@ function List() {
                             <div className="p-2">
                               <p>{item.name}</p>
                               <div className="flex-row flex">
-                                <p className="text-neutral-400 text-sm">{item.desc}</p>
+                                <p className="text-neutral-200 text-sm">{item.desc}</p>
                               </div>
                             </div>
                             <div className="flex justify-between p-2">
