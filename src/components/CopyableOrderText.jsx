@@ -61,5 +61,3 @@ function CopyableOrderText({ order }) {
 }
 
 export default CopyableOrderText;
-
-//TODO: Fixare il fatto che i tramezzini con i nomi lunghi fanno overflow
