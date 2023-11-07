@@ -9,7 +9,7 @@ const Footer = () => {
       <div className="border-t-[1px] border-[#202020] w-[95%] flex flex-col justify-center items-center gap-2 p-4">
         <div><p className="text-neutral-400">© { crntYear } | Tutti i diritti riservati</p></div>
         <div className="flex flex-row justify-center items-center gap-2">
-          <p className="text-neutral-400">Più informazioni -{'>'}</p> {/* TEMP */}
+          <p className="text-neutral-400">Più informazioni -{" "}</p> {/* TEMP */}
           <a
             href="https://github.com/Raptor1818/bar-calculator"
             target="_blank"

@@ -122,8 +122,8 @@ function List() {
                           </div>
                           <div className="flex justify-between p-2">
                             <div className="mr-1 pt-2">
-                              <p className="font-roboto-mono">€{item.price.toFixed(2)}</p>
-                            </div>
+                              <p className="font-roboto-mono prices">€{item.price.toFixed(2)}</p>
+                            </div> 
                             <div>
                               <button className="h-10 w-10 flex items-center justify-center" onClick={() => addItemToOrder(item)} title="Aggiungi" role="button" aria-label="Aggiungi" type="button">
                                 <FaSquarePlus className="text-3xl" />
@@ -146,7 +146,7 @@ function List() {
                             </div>
                             <div className="flex justify-between p-2">
                               <div className="mr-1 pt-2">
-                                <p className="font-roboto-mono">€{item.price.toFixed(2)}</p>
+                                <p className="font-roboto-mono prices">€{item.price.toFixed(2)}</p>
                               </div>
                               <div>
                                 <button className="h-10 w-10 flex items-center justify-center" onClick={() => addItemToOrder(item)} title="Aggiungi" role="button" aria-label="Aggiungi" type="button">
@@ -170,7 +170,7 @@ function List() {
                             </div>
                             <div className="flex justify-between p-2">
                               <div className="mr-1 pt-2">
-                                <p className="font-roboto-mono">€{item.price.toFixed(2)}</p>
+                                <p className="font-roboto-mono prices">€{item.price.toFixed(2)}</p>
                               </div>
                               <div>
                                 <button className="h-10 w-10 flex items-center justify-center" onClick={() => addItemToOrder(item)} title="Aggiungi" role="button" aria-label="Aggiungi" type="button">
@@ -188,12 +188,12 @@ function List() {
             </div>
           ) : (
             <div className="px-2 py-2">
-              <div className="flex flex-col justify-between items-center">
+              <div className="flex flex-col justify-between items-center pb-2">
                 <div>
                   <h2 className="text-2xl md:text-3xl lg:text-4xl text-center font-bold mt-4">Ordine</h2>
                 </div>
-                <div className="flex justify-between w-full mt-3 pt-3 border-t-[1px] border-solid border-neutral-500">
-                  <p className="text-xl font-medium font-roboto-mono">
+                <div className="flex justify-between w-full mt-3 pt-4 border-t-[1px] border-solid border-neutral-500">
+                  <p className="text-xl font-medium font-roboto-mono prices">
                     Totale: €{calculateTotal().toFixed(2)}
                   </p>
                   <button title="Clear" role="button" aria-label="Clear" type="button"
@@ -213,7 +213,7 @@ function List() {
                     <div className="flex justify-between">
                       <p className="p-2 text-right font-roboto-mono">{item.quantity > 1 && `x${item.quantity} `}</p>
                       <div className="mr-1">
-                        <p className="p-2 font-roboto-mono">€{(item.price * item.quantity).toFixed(2)}</p>
+                        <p className="p-2 font-roboto-mono prices">€{(item.price * item.quantity).toFixed(2)}</p>
                       </div>
                       <div>
                         <button className="h-10 w-10 flex items-center justify-center" onClick={() => removeItemFromOrder(item)} title="Togli" role="button" aria-label="Togli" type="button">
